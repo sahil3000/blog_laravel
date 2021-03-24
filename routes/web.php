@@ -7,19 +7,11 @@ use App\Http\Controllers\admin\PageController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\front\GetPostController;
 use App\Http\Controllers\front\GetPageController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-// normal
+
+
+// front end
 Route::get('/',[GetPostController::class,'list']);
-// show different pages
+// show different pages in front end
 Route::get('/{slug}',[GetPageController::class,'show']);
 Route::get('/detail/{slug}',[GetPostController::class,'detail']);
 
@@ -31,6 +23,7 @@ Route::post('/admin/login',[AuthUser::class,'login']);
 Route::group(['middleware'=>['admin_auth']],function(){
     Route::get('admin/logout',function(){
         session()->forget('BLOG_USER_ID');
+        session()->forget('BLOG_USER_NAME');
         return redirect('/admin/login');
     });
 

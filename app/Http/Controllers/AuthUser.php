@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthUser extends Controller
 {
@@ -14,7 +15,12 @@ class AuthUser extends Controller
 		$email=$req->input('email');
 		$password=$req->input('password');
 		
-		$result=DB::table('users')->where('email',$email)->where('password',$password)->get();
+		$result=DB::table('users')->where('email',$email)->get();
+
+		if(!Hash::check($password,$result[0]->password)){
+			$req->session()->flash('msg','Please enter valid login details');
+			return redirect('admin/login');
+		}
 		// print_r($result);
 		if(isset($result[0]->id)){
 			if($result[0]->status==1){
@@ -30,6 +36,5 @@ class AuthUser extends Controller
 			$req->session()->flash('msg','Please enter valid login details');
 			return redirect('admin/login');
 		}
-		return "Sahil";
 	}
 }

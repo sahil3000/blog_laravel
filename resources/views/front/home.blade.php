@@ -5,15 +5,16 @@
     <span class="subheading">A Blog Site by Sahil Manhotra</span>
 @endsection
 @section('content')
-    @foreach($result as $list)
+    @foreach($posts as $post)
     <div class="post-preview">
-        <a href="{{ url('/detail/'.$list->slug) }}">
-            <h2 class="post-title">{{ $list->title }}</h2>
-            <h3 class="post-subtitle"> {{ $list->short_desc }} </h3>
+    <!-- <h2 class="post-title">vxjnfvcn</h2> -->
+        <a href="{{ url('/detail/'.$post->slug) }}">
+            <h2 class="post-title">{{ $post->title }}</h2>
+            <h3 class="post-subtitle"> {{ $post->short_desc }} </h3>
         </a>
-        <p class="post-meta">Posted by Sahil Manhotra on {{ $list->post_date }}</p>
+        <p class="post-meta">Posted by Sahil Manhotra on {{ $post->post_date }}</p>
     </div>
     @endforeach
-
+    {{ $posts->links('pagination::bootstrap-4') }}
 @endsection
 

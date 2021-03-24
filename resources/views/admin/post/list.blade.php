@@ -22,7 +22,7 @@
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th width="5%">SNO</th>
+								<th width="5%">Id</th>
 								<th width="45%">Title</th>
 								<th width="15%">Image</th>
 								<th width="15%">Post Date</th>
@@ -33,7 +33,7 @@
 							<?php $i=0 ?>
 							@foreach($result as $list)
 							<tr>
-								<td> {{++$i}} </td>
+								<td> {{$list->id}} </td>
 								<td>{{$list->title}}</td>
 								<td> <image src="{{asset('storage').'/'.$list->image}}" width="100" height="100" alt="image" /> </td>
 								<td> {{$list->post_date}} </td>
@@ -43,8 +43,10 @@
 								</td>
 							</tr>
 							@endforeach
+				
 						</tbody>
 					</table>
+					{{ $result->links('pagination::bootstrap-4') }}
 				</div>
 			</div>
 		</div>

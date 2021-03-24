@@ -5,11 +5,12 @@ use Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Post;
 class PostController extends Controller
 {
     public function listing(){
-        $data['result']=DB::table('posts')->orderBy('id','desc')->get();
+        $data['result']=Post::orderBy('id','desc')->paginate(3);
+        // $data['result']=DB::table('posts')->orderBy('id','desc')->get();
         return view('admin.post.list',$data); 
     }
 
